@@ -1,23 +1,61 @@
-package com.enessimsek.earthquakeproject.service;
+package com.enessimsek.earthquakeproject.entity;
 
+import java.util.Date;
 
-import com.enessimsek.earthquakeproject.dto.EarthquakeDto;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+public class Earthquake {
+    private float magnitude;
 
-import java.util.Arrays;
-import java.util.List;
+    private  String location;
 
-@Service
-public class EarthquakeService {
+    private long timeInMilliseconds;
 
-    public List<EarthquakeDto> findAll(){
-        String url="https://restcountries.com/v3.1/name/all";
-        RestTemplate restTemplate=new RestTemplate();
-        return Arrays.asList(restTemplate.getForObject(url,EarthquakeDto[].class));
+    private String Url;
+
+    private Date date;
+
+    public Earthquake(float magnitude, String location, long timeInMilliseconds, String url) {
+        this.magnitude = magnitude;
+        this.location = location;
+        this.timeInMilliseconds = timeInMilliseconds;
+        Url = url;
     }
 
-   /* public EarthquakeDto findByNameAndDays(){
+    public float getMagnitude() {
+        return magnitude;
+    }
 
-    }*/
+    public void setMagnitude(float magnitude) {
+        this.magnitude = magnitude;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public long getTimeInMilliseconds() {
+        return timeInMilliseconds;
+    }
+
+    public void setTimeInMilliseconds(long timeInMilliseconds) {
+        this.timeInMilliseconds = timeInMilliseconds;
+    }
+
+    public String getUrl() {
+        return Url;
+    }
+
+    public void setUrl(String url) {
+        Url = url;
+    }
+
+    public Date getDate() {
+        if(timeInMilliseconds>0){
+            return new Date(timeInMilliseconds);
+        }
+        return null;
+    }
 }
